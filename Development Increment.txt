@@ -1,0 +1,9 @@
+College Event Management App-Development Plan
+
+Increment 1:Event Display
+Display upcoming college events.
+Show event name, date, time and venue.
+
+Increment 2: Event Registration
+Allow students to register for events. 
+Display registration confirmation.
