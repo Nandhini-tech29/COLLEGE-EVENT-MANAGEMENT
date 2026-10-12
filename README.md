@@ -3,1665 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#4f46e5">
 <title>CampusConnect | College Events</title>
-
 <style>
-:root {
-    --primary: #4f46e5;
-    --primary-dark: #3730a3;
-    --background: #f6f7fb;
-    --white: #ffffff;
-    --text: #1e293b;
-    --muted: #64748b;
-    --border: #e5e7eb;
-    --success: #15803d;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--background);
-    color: var(--text);
-    line-height: 1.6;
-}
-
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-header {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navbar {
-    max-width: 1250px;
-    margin: auto;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--primary);
-    white-space: nowrap;
-}
-
-.logo span {
-    color: var(--text);
-}
-
-.nav-links {
-    display: flex;
-    gap: 10px;
-    list-style: none;
-}
-
-.nav-links button {
-    border: none;
-    background: transparent;
-    padding: 10px 14px;
-    color: var(--muted);
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.nav-links button:hover,
-.nav-links button.active {
-    color: var(--primary);
-    background: #eef2ff;
-}
-
-.profile-button {
-    background: var(--primary);
-    color: white;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-main {
-    max-width: 1250px;
-    margin: auto;
-    padding: 32px 24px 60px;
-}
-
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-.hero {
-    background: linear-gradient(120deg, #3730a3, #6366f1);
-    color: white;
-    border-radius: 20px;
-    padding: 48px;
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    align-items: center;
-    gap: 30px;
-    margin-bottom: 36px;
-    overflow: hidden;
-}
-
-.hero-label {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    padding: 7px 13px;
-    border-radius: 30px;
-    margin-bottom: 16px;
-    font-size: 13px;
-}
-
-.hero h1 {
-    font-size: clamp(30px, 4vw, 46px);
-    line-height: 1.2;
-    margin-bottom: 16px;
-}
-
-.hero p {
-    color: #e0e7ff;
-    max-width: 540px;
-    margin-bottom: 24px;
-}
-
-.hero-button {
-    background: white;
-    color: var(--primary-dark);
-    border: none;
-    padding: 13px 20px;
-    border-radius: 9px;
-    font-weight: 700;
-}
-
-.hero-art {
-    text-align: center;
-    font-size: 110px;
-    background: rgba(255,255,255,0.1);
-    padding: 28px;
-    border-radius: 20px;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 40px;
-}
-
-.stat-card {
-    background: white;
-    border: 1px solid var(--border);
-    padding: 22px;
-    border-radius: 14px;
-}
-
-.stat-card p {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.stat-card h2 {
-    font-size: 30px;
-    margin-top: 5px;
-}
-
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 22px;
-}
-
-.section-heading h2 {
-    font-size: 25px;
-}
-
-.text-button {
-    color: var(--primary);
-    border: none;
-    background: transparent;
-    font-weight: 700;
-}
-
-.toolbar {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 26px;
-    flex-wrap: wrap;
-}
-
-.search-box {
-    flex: 1;
-    min-width: 220px;
-}
-
-.search-box input,
-.toolbar select,
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
-    background: white;
-    outline: none;
-}
-
-.search-box input:focus,
-.form-group input:focus,
-.form-group select:focus {
-    border-color: var(--primary);
-}
-
-.toolbar select {
-    width: 200px;
-}
-
-.event-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.event-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.event-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
-}
-
-.event-cover {
-    min-height: 155px;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    color: white;
-}
-
-.cover-tech {
-    background: linear-gradient(135deg, #312e81, #818cf8);
-}
-
-.cover-culture {
-    background: linear-gradient(135deg, #9d174d, #fb7185);
-}
-
-.cover-sports {
-    background: linear-gradient(135deg, #065f46, #34d399);
-}
-
-.cover-workshop {
-    background: linear-gradient(135deg, #9a3412, #fb923c);
-}
-
-.cover-entrepreneurship {
-    background: linear-gradient(135deg, #164e63, #22d3ee);
-}
-
-.cover-arts {
-    background: linear-gradient(135deg, #581c87, #c084fc);
-}
-
-.event-emoji {
-    font-size: 48px;
-    align-self: center;
-}
-
-.category-badge {
-    background: rgba(255,255,255,0.2);
-    padding: 5px 10px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.event-body {
-    padding: 20px;
-}
-
-.event-body h3 {
-    font-size: 19px;
-    margin-bottom: 10px;
-}
-
-.event-description {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 18px;
-    min-height: 44px;
-}
-
-.event-detail {
-    color: #475569;
-    font-size: 13px;
-    margin-bottom: 8px;
-}
-
-.event-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 18px;
-}
-
-.seats {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.primary-button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 11px 16px;
-    font-weight: 700;
-}
-
-.primary-button:hover {
-    background: var(--primary-dark);
-}
-
-.primary-button:disabled {
-    background: #9ca3af;
-    cursor: not-allowed;
-}
-
-.secondary-button {
-    background: white;
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 55px 20px;
-    background: white;
-    border-radius: 14px;
-    border: 1px solid var(--border);
-}
-
-.empty-state h3 {
-    margin-bottom: 10px;
-}
-
-.empty-state p {
-    color: var(--muted);
-    margin-bottom: 18px;
-}
-
-.registration-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.registration-card p {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.status-badge {
-    display: inline-block;
-    color: var(--success);
-    background: #dcfce7;
-    padding: 5px 10px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-top: 8px;
-}
-
-.danger-button {
-    border: 1px solid #fecaca;
-    color: #b91c1c;
-    background: #fff;
-    padding: 9px 12px;
-    border-radius: 8px;
-}
-
-.profile-panel {
-    max-width: 600px;
-    background: white;
-    padding: 28px;
-    border: 1px solid var(--border);
-    border-radius: 15px;
-}
-
-.profile-panel h2 {
-    margin-bottom: 8px;
-}
-
-.profile-panel > p {
-    color: var(--muted);
-    margin-bottom: 24px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.form-group input[readonly] {
-    background: #f3f4f6;
-}
-
-footer {
-    background: white;
-    border-top: 1px solid var(--border);
-    padding: 25px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-}
-
-/* Registration modal */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.6);
-    z-index: 200;
-    padding: 20px;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal-content {
-    width: 100%;
-    max-width: 480px;
-    background: white;
-    border-radius: 16px;
-    padding: 28px;
-    margin: auto;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 8px;
-}
-
-.close-button {
-    border: none;
-    background: transparent;
-    font-size: 26px;
-    color: var(--muted);
-    align-self: flex-start;
-}
-
-.modal-description {
-    color: var(--muted);
-    margin-bottom: 22px;
-    font-size: 14px;
-}
-
-.form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 24px;
-}
-
-.form-actions button {
-    flex: 1;
-}
-
-.toast {
-    display: none;
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: #166534;
-    color: white;
-    padding: 15px 22px;
-    border-radius: 10px;
-    z-index: 300;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    max-width: calc(100% - 40px);
-}
-
-.toast.show {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 950px) {
-    .event-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .hero {
-        padding: 32px;
-    }
-}
-
-@media (max-width: 650px) {
-    .navbar {
-        flex-wrap: wrap;
-        padding: 14px 16px;
-    }
-
-    .nav-links {
-        order: 3;
-        width: 100%;
-        overflow-x: auto;
-        justify-content: flex-start;
-    }
-
-    .nav-links button {
-        white-space: nowrap;
-    }
-
-    .logo {
-        font-size: 21px;
-    }
-
-    main {
-        padding: 22px 16px 40px;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-        padding: 27px;
-    }
-
-    .hero-art {
-        display: none;
-    }
-
-    .stats {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .event-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .toolbar select {
-        width: 100%;
-    }
-
-    .registration-card {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .section-heading {
-        align-items: flex-start;
-    }
-}
+:root{--primary:#5145e5;--primary-dark:#3930a3;--ink:#172033;--muted:#667085;--line:#e6e8ef;--bg:#f6f7fb;--white:#fff;--green:#15803d;--amber:#b45309;--shadow:0 12px 34px rgba(24,32,56,.08)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c7d2fe;outline-offset:2px}.container{max-width:1240px;margin:auto;padding:0 24px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:22px;letter-spacing:-.6px;color:var(--ink);white-space:nowrap}.brand-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:var(--primary);color:white}.brand span:last-child{color:var(--primary)}.navlinks{display:flex;gap:5px;list-style:none;align-items:center}.navlinks button{border:0;background:transparent;color:#667085;padding:10px 13px;border-radius:10px;font-weight:650}.navlinks button:hover,.navlinks button.active{color:var(--primary);background:#eef2ff}.navright{display:flex;align-items:center;gap:10px}.avatar{width:38px;height:38px;display:grid;place-items:center;background:#e0e7ff;color:#3730a3;border-radius:50%;font-weight:800}
+.btn{border:0;border-radius:11px;padding:11px 16px;font-weight:750;transition:.18s}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}.btn-outline{background:white;color:var(--ink);border:1px solid var(--line)}.btn-outline:hover{border-color:#a5b4fc;color:var(--primary)}.btn-light{background:#fff;color:var(--primary-dark)}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+main{padding:30px 0 64px}.page{display:none}.page.active{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:52px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:26px;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.22),transparent 27%),linear-gradient(125deg,#282276,#5145e5 58%,#8b5cf6);color:white;box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;width:340px;height:340px;border:1px solid rgba(255,255,255,.17);border-radius:50%;right:5%;top:-110px}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.12);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}.hero h1{font-size:clamp(34px,4.4vw,58px);line-height:1.07;letter-spacing:-1.9px;margin:20px 0 17px;max-width:680px}.hero p{max-width:590px;color:#e5e7ff;font-size:16px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}.hero-art{position:relative;z-index:1;display:grid;place-items:center;min-height:255px}.hero-orbit{width:245px;height:245px;border:1px solid rgba(255,255,255,.25);border-radius:50%;display:grid;place-items:center;position:relative;background:rgba(255,255,255,.07)}.hero-cap{font-size:100px;filter:drop-shadow(0 18px 16px rgba(0,0,0,.18))}.float-card{position:absolute;background:white;color:var(--ink);padding:12px 15px;border-radius:14px;box-shadow:0 12px 30px rgba(20,20,70,.18);font-size:13px;font-weight:800}.float-card small{display:block;color:var(--muted);font-weight:600}.float-one{top:24px;right:-10px}.float-two{bottom:22px;left:-20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0 42px}.stat{background:white;border:1px solid var(--line);border-radius:17px;padding:20px;display:flex;align-items:center;gap:15px}.stat-icon{width:47px;height:47px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#eef2ff}.stat p{color:var(--muted);font-size:13px}.stat h3{font-size:25px;line-height:1.25;margin-top:3px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:36px 0 20px}.section-head h2{font-size:27px;letter-spacing:-.6px}.section-head p{color:var(--muted);font-size:14px;margin-top:4px}.text-btn{background:transparent;border:0;color:var(--primary);font-weight:800;padding:8px}
+.promo-strip{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border:1px solid var(--line);padding:21px 24px;border-radius:17px;margin:28px 0}.promo-strip h3{font-size:17px}.promo-strip p{font-size:13px;color:var(--muted);margin-top:3px}.promo-icon{font-size:32px}
+.toolbar{display:flex;gap:11px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);padding:15px;border-radius:15px;margin:23px 0}.search{flex:1;min-width:220px;position:relative}.search input{width:100%;padding:12px 14px 12px 42px;border:1px solid var(--line);border-radius:10px;background:#fafbff}.search:before{content:"⌕";font-size:25px;position:absolute;left:14px;top:3px;color:var(--muted)}.toolbar select{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);min-width:145px}.results-line{color:var(--muted);font-size:13px;margin:-10px 0 17px}
+.event-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.event-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}.event-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.cover{height:158px;padding:16px;display:flex;align-items:flex-start;justify-content:space-between;color:white;position:relative;overflow:hidden}.cover:after{content:"";position:absolute;width:170px;height:170px;border:1px solid rgba(255,255,255,.2);border-radius:50%;right:-45px;bottom:-95px;box-shadow:0 0 0 20px rgba(255,255,255,.04),0 0 0 42px rgba(255,255,255,.04)}.cover.tech{background:linear-gradient(135deg,#312e81,#818cf8)}.cover.culture{background:linear-gradient(135deg,#9d174d,#fb7185)}.cover.sports{background:linear-gradient(135deg,#065f46,#34d399)}.cover.workshop{background:linear-gradient(135deg,#9a3412,#fb923c)}.cover.startup{background:linear-gradient(135deg,#164e63,#22d3ee)}.cover.arts{background:linear-gradient(135deg,#581c87,#c084fc)}.cover.career{background:linear-gradient(135deg,#1d4ed8,#60a5fa)}.cover.wellness{background:linear-gradient(135deg,#0f766e,#5eead4)}.cover.music{background:linear-gradient(135deg,#86198f,#e879f9)}.cover.environment{background:linear-gradient(135deg,#3f6212,#a3e635)}.cover.finance{background:linear-gradient(135deg,#92400e,#fbbf24)}.cover.community{background:linear-gradient(135deg,#334155,#94a3b8)}.category{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.22);padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;z-index:1}.cover-icon{font-size:52px;align-self:center;margin-right:18px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.12));z-index:1}.event-body{padding:19px;display:flex;flex-direction:column;flex:1}.event-title-row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.event-body h3{font-size:18px;line-height:1.3;letter-spacing:-.2px}.price{white-space:nowrap;background:#f3f4f6;border-radius:8px;padding:4px 8px;font-size:12px;font-weight:850}.price.free{background:#dcfce7;color:#166534}.event-desc{color:var(--muted);font-size:13px;margin:11px 0 14px;min-height:40px}.event-meta{display:grid;gap:7px;color:#475467;font-size:12px}.event-meta span{display:flex;gap:8px;align-items:center}.event-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:17px}.seat-note{font-size:11px;color:var(--muted)}.event-buttons{display:flex;gap:7px}.small-btn{padding:9px 11px;font-size:12px;border-radius:9px}.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:5px 8px;border-radius:7px}.badge-paid{color:#92400e;background:#fef3c7}.badge-free{color:#166534;background:#dcfce7}
+.empty{grid-column:1/-1;background:#fff;text-align:center;padding:48px 20px;border:1px solid var(--line);border-radius:17px}.empty .empty-icon{font-size:44px}.empty h3{margin:10px 0 5px}.empty p{color:var(--muted);font-size:14px;margin-bottom:15px}
+.content-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}.registration-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:19px 0;border-bottom:1px solid var(--line)}.registration-row:last-child{border-bottom:0}.registration-row h3{font-size:17px}.registration-row p{color:var(--muted);font-size:13px;margin-top:4px}.registration-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.status{display:inline-block;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:850;background:#dcfce7;color:#166534}.status.pending{background:#fef3c7;color:#92400e}.status.cancelled{background:#fee2e2;color:#991b1b}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.profile-card{max-width:720px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field{margin-bottom:16px}.field.full{grid-column:1/-1}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #d8dce6;border-radius:10px;padding:12px 13px;background:#fff;color:var(--ink)}.field textarea{resize:vertical;min-height:90px}.hint{font-size:12px;color:var(--muted);margin-top:5px}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:23px}.info-card h3{margin-bottom:7px}.info-card p{font-size:14px;color:var(--muted)}.info-card .large-icon{font-size:30px;margin-bottom:10px}
+.faq-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}.faq{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}.faq h3{font-size:15px;margin-bottom:6px}.faq p{color:var(--muted);font-size:13px}
+footer{background:#111827;color:#d1d5db;padding:40px 0 20px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}.footer-brand{font-size:21px;font-weight:850;color:#fff;margin-bottom:9px}.footer-grid p,.footer-grid li{font-size:13px;color:#9ca3af}.footer-grid h4{color:#fff;margin-bottom:12px}.footer-grid ul{list-style:none;display:grid;gap:7px}.footer-bottom{border-top:1px solid #374151;margin-top:28px;padding-top:17px;font-size:12px;color:#9ca3af;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,23,42,.66);padding:20px;overflow-y:auto;align-items:center;justify-content:center}.modal.show{display:flex}.modal-box{background:white;width:min(720px,100%);border-radius:22px;overflow:hidden;margin:auto;box-shadow:0 25px 80px rgba(0,0,0,.25)}.modal-cover{height:185px;padding:22px;color:white;display:flex;justify-content:space-between;align-items:flex-start;position:relative}.modal-cover .cover-icon{font-size:70px;margin-right:25px}.modal-cover h2{font-size:27px;max-width:500px;line-height:1.2;margin-top:18px}.modal-close{border:0;background:rgba(255,255,255,.18);color:white;border-radius:50%;width:38px;height:38px;font-size:23px;z-index:2}.modal-main{padding:25px}.modal-main p{color:var(--muted);font-size:14px}.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}.detail-item{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:13px}.detail-item small{display:block;color:var(--muted);font-size:11px;margin-bottom:3px}.detail-item strong{font-size:13px}.modal-section{margin:20px 0}.modal-section h3{font-size:16px;margin-bottom:7px}.modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.payment-box{background:#f8fafc;border:1px solid var(--line);padding:15px;border-radius:13px;margin:16px 0}.payment-box h3{font-size:15px;margin-bottom:9px}.payment-options{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.payment-option{border:1px solid var(--line);background:white;border-radius:10px;padding:12px 8px;text-align:center;font-size:12px;font-weight:750}.payment-option input{margin-right:5px;accent-color:var(--primary)}.payment-option:has(input:checked){border-color:var(--primary);background:#eef2ff}.payment-warning{font-size:12px!important;color:#92400e!important;background:#fffbeb;padding:10px;border-radius:8px;margin-top:12px}
+.toast{position:fixed;right:22px;bottom:22px;background:#166534;color:white;padding:14px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:150;display:none;max-width:calc(100% - 44px);font-size:14px;font-weight:700}.toast.show{display:block;animation:appear .2s ease}
+@media(max-width:1000px){.nav{flex-wrap:wrap;padding-top:12px;padding-bottom:12px}.navlinks{order:3;width:100%;overflow:auto}.navlinks button{white-space:nowrap}.event-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:38px}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.container{padding:0 15px}.nav{gap:12px}.brand{font-size:19px}.navright .btn{padding:9px 11px}.hero{grid-template-columns:1fr;padding:27px;border-radius:20px}.hero-art{display:none}.hero h1{letter-spacing:-1px}.stats{gap:10px}.stat{padding:14px;gap:10px}.stat-icon{width:38px;height:38px;font-size:18px}.stat h3{font-size:21px}.event-grid,.info-grid,.faq-list,.footer-grid{grid-template-columns:1fr}.section-head{align-items:flex-start}.section-head h2{font-size:23px}.toolbar select{width:100%}.search{min-width:100%}.promo-strip{align-items:flex-start}.form-grid,.detail-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.registration-row{align-items:flex-start;flex-direction:column}.registration-actions{width:100%}.modal{padding:10px}.modal-cover{height:165px}.modal-cover h2{font-size:22px}.modal-main{padding:18px}.payment-options{grid-template-columns:1fr}.footer-bottom{flex-direction:column}}
 </style>
 </head>
-
 <body>
-
 <header>
-    <nav class="navbar">
-
-        <div class="logo">Campus<span>Connect</span></div>
-
-        <ul class="nav-links">
-            <li>
-                <button class="active" data-page="home">Home</button>
-            </li>
-            <li>
-                <button data-page="events">Events</button>
-            </li>
-            <li>
-                <button data-page="registrations">My Registration</button>
-            </li>
-            <li>
-                <button data-page="profile">Profile</button>
-            </li>
-        </ul>
-
-        <button class="profile-button" id="navProfile">
-            My Profile
-        </button>
-
-    </nav>
+  <div class="container nav">
+    <a href="#" class="brand" style="text-decoration:none" aria-label="CampusConnect home"><span class="brand-icon">✦</span><span>Campus<span>Connect</span></span></a>
+    <ul class="navlinks">
+      <li><button class="active" data-page="home">Home</button></li>
+      <li><button data-page="events">Explore Events</button></li>
+      <li><button data-page="registrations">My Registrations</button></li>
+      <li><button data-page="about">About</button></li>
+      <li><button data-page="profile">My Profile</button></li>
+    </ul>
+    <div class="navright"><div class="avatar" id="avatar">S</div><button class="btn btn-primary" id="topExplore">Find Events</button></div>
+  </div>
 </header>
 
-<main>
+<main class="container">
+  <section id="home" class="page active">
+    <div class="hero">
+      <div>
+        <span class="eyebrow">✦ Your campus, your community</span>
+        <h1>Make college life more than just classes.</h1>
+        <p>Discover campus festivals, tech challenges, workshops, sports and student communities. Find your next experience and book your spot in a few clicks.</p>
+        <div class="hero-actions"><button class="btn btn-light" id="heroExplore">Explore all events →</button><button class="btn" style="background:rgba(255,255,255,.13);color:white;border:1px solid rgba(255,255,255,.25)" id="heroMyRegs">My registrations</button></div>
+      </div>
+      <div class="hero-art"><div class="hero-orbit"><div class="hero-cap">🎓</div><div class="float-card float-one">✨ New experiences<small>Waiting for you</small></div><div class="float-card float-two">🎟️ Your next event<small>Just one click away</small></div></div></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-icon">🗓️</div><div><p>Upcoming events</p><h3 id="statEvents">12</h3></div></div>
+      <div class="stat"><div class="stat-icon">🎟️</div><div><p>Your registrations</p><h3 id="statRegs">0</h3></div></div>
+      <div class="stat"><div class="stat-icon">🆓</div><div><p>Free events</p><h3 id="statFree">0</h3></div></div>
+      <div class="stat"><div class="stat-icon">💳</div><div><p>Paid events</p><h3 id="statPaid">0</h3></div></div>
+    </div>
+    <div class="section-head"><div><h2>Popular on campus</h2><p>Student favourites and events you won't want to miss.</p></div><button class="text-btn" data-goto="events">See all events →</button></div>
+    <div class="event-grid" id="featuredGrid"></div>
+    <div class="promo-strip"><div><h3>Have your student details ready?</h3><p>Save your profile once to make event registration quicker next time.</p></div><button class="btn btn-outline" data-goto="profile">Set up my profile →</button><div class="promo-icon">🪪</div></div>
+    <div class="section-head"><div><h2>Find your kind of event</h2><p>From learning something new to meeting your campus community.</p></div></div>
+    <div class="event-grid" id="categoryHighlights"></div>
+  </section>
 
-    <!-- HOME PAGE -->
+  <section id="events" class="page">
+    <div class="section-head"><div><h2>Explore campus events</h2><p>Compare event details, fees, dates and registration availability before booking.</p></div></div>
+    <div class="toolbar">
+      <div class="search"><input type="search" id="searchInput" placeholder="Search event, venue or keyword..." aria-label="Search events"></div>
+      <select id="categoryFilter" aria-label="Filter by category"><option value="All">All categories</option><option>Technical</option><option>Cultural</option><option>Sports</option><option>Workshop</option><option>Entrepreneurship</option><option>Arts</option><option>Career</option><option>Wellness</option><option>Music</option><option>Environment</option><option>Community</option></select>
+      <select id="priceFilter" aria-label="Filter by price"><option value="All">Paid & free</option><option value="Free">Free events</option><option value="Paid">Paid events</option></select>
+      <select id="sortFilter" aria-label="Sort events"><option value="date">Soonest first</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name A–Z</option></select>
+    </div>
+    <div class="results-line" id="resultsLine">Showing all upcoming events</div>
+    <div class="event-grid" id="allEventsGrid"></div>
+  </section>
 
-    <section id="home" class="page active">
+  <section id="registrations" class="page">
+    <div class="section-head"><div><h2>My registrations</h2><p>Your event bookings and payment selections in one place.</p></div><button class="btn btn-primary" data-goto="events">+ Find an event</button></div>
+    <div class="content-panel"><div id="registrationList"></div></div>
+  </section>
 
-        <div class="hero">
-
-            <div>
-                <span class="hero-label">YOUR CAMPUS, YOUR COMMUNITY</span>
-
-                <h1>Discover events.<br>Make memories.</h1>
-
-                <p>
-                    Explore technical symposiums, cultural fests,
-                    workshops, sports and more. Find your next
-                    campus experience and register in minutes.
-                </p>
-
-                <button class="hero-button" id="exploreEvents">
-                    Explore Events →
-                </button>
-            </div>
-
-            <div class="hero-art" aria-hidden="true">
-                🎓
-            </div>
-
+  <section id="profile" class="page">
+    <div class="section-head"><div><h2>Student profile</h2><p>Save your information so event forms can be filled in faster.</p></div></div>
+    <div class="content-panel profile-card">
+      <form id="profileForm">
+        <div class="form-grid">
+          <div class="field"><label for="profileName">Full name *</label><input id="profileName" required placeholder="Your full name"></div>
+          <div class="field"><label for="profileEmail">College email *</label><input id="profileEmail" type="email" required placeholder="you@college.edu"></div>
+          <div class="field"><label for="profileStudentId">Student ID *</label><input id="profileStudentId" required placeholder="e.g. 23CS001"></div>
+          <div class="field"><label for="profileDept">Department *</label><select id="profileDept" required><option value="">Choose department</option><option>CSE</option><option>CSBS</option><option>IT</option><option>ECE</option><option>EEE</option><option>Mechanical</option><option>Civil</option><option>Other</option></select></div>
+          <div class="field"><label for="profileYear">Year of study</label><select id="profileYear"><option value="">Choose year</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option><option>Other</option></select></div>
+          <div class="field"><label for="profilePhone">Phone number</label><input id="profilePhone" type="tel" placeholder="Optional"></div>
         </div>
+        <button class="btn btn-primary" type="submit">Save student profile</button>
+      </form>
+    </div>
+    <div class="promo-strip"><div><h3>Privacy note</h3><p>This demo stores profile and registration information in this browser only. Avoid entering sensitive personal information.</p></div><div class="promo-icon">🔒</div></div>
+  </section>
 
-        <div class="stats">
-
-            <div class="stat-card">
-                <p>Upcoming Events</p>
-                <h2 id="eventCount">0</h2>
-            </div>
-
-            <div class="stat-card">
-                <p>My Registrations</p>
-                <h2 id="registrationCount">0</h2>
-            </div>
-
-            <div class="stat-card">
-                <p>Event Categories</p>
-                <h2 id="categoryCount">0</h2>
-            </div>
-
-        </div>
-
-        <div class="section-heading">
-            <h2>Upcoming Events</h2>
-
-            <button class="text-button" id="viewAllEvents">
-                View all events →
-            </button>
-        </div>
-
-        <div class="event-grid" id="featuredEvents"></div>
-
-    </section>
-
-
-    <!-- EVENTS PAGE -->
-
-    <section id="events" class="page">
-
-        <div class="section-heading">
-            <div>
-                <h2>College Events</h2>
-                <p style="color:#64748b">
-                    Find an event that matches your interests.
-                </p>
-            </div>
-        </div>
-
-        <div class="toolbar">
-
-            <div class="search-box">
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="Search for events..."
-                    aria-label="Search events"
-                >
-            </div>
-
-            <select id="categoryFilter" aria-label="Filter by category">
-                <option value="All">All Categories</option>
-                <option value="Technical">Technical</option>
-                <option value="Cultural">Cultural</option>
-                <option value="Sports">Sports</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Entrepreneurship">Entrepreneurship</option>
-                <option value="Arts">Arts</option>
-            </select>
-
-            <select id="sortFilter" aria-label="Sort events">
-                <option value="date">Sort by Date</option>
-                <option value="name">Sort by Name</option>
-            </select>
-
-        </div>
-
-        <div class="event-grid" id="allEvents"></div>
-
-    </section>
-
-
-    <!-- MY REGISTRATIONS PAGE -->
-
-    <section id="registrations" class="page">
-
-        <div class="section-heading">
-            <div>
-                <h2>My Registrations</h2>
-                <p style="color:#64748b">
-                    Keep track of the events you've registered for.
-                </p>
-            </div>
-        </div>
-
-        <div id="registrationList"></div>
-
-    </section>
-
-
-    <!-- PROFILE PAGE -->
-
-    <section id="profile" class="page">
-
-        <div class="profile-panel">
-
-            <h2>My Profile</h2>
-
-            <p>
-                Enter your details to use them when registering
-                for college events.
-            </p>
-
-            <form id="profileForm">
-
-                <div class="form-group">
-                    <label for="studentName">Full Name</label>
-                    <input
-                        type="text"
-                        id="studentName"
-                        placeholder="Enter your name"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="studentEmail">College Email</label>
-                    <input
-                        type="email"
-                        id="studentEmail"
-                        placeholder="Enter your email"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="studentId">Student ID</label>
-                    <input
-                        type="text"
-                        id="studentId"
-                        placeholder="Enter your student ID"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="studentDepartment">Department</label>
-
-                    <select id="studentDepartment" required>
-                        <option value="">Select department</option>
-                        <option value="CSE">Computer Science</option>
-                        <option value="CSBS">Computer Science and Business Systems</option>
-                        <option value="IT">Information Technology</option>
-                        <option value="ECE">Electronics and Communication</option>
-                        <option value="EEE">Electrical and Electronics</option>
-                        <option value="MECH">Mechanical Engineering</option>
-                        <option value="CIVIL">Civil Engineering</option>
-                        <option value="OTHER">Other</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="primary-button">
-                    Save Profile
-                </button>
-
-            </form>
-
-        </div>
-
-    </section>
-
+  <section id="about" class="page">
+    <div class="section-head"><div><h2>One campus. Many possibilities.</h2><p>CampusConnect helps students discover and keep track of college activities.</p></div></div>
+    <div class="info-grid">
+      <div class="info-card"><div class="large-icon">🔎</div><h3>Discover</h3><p>Browse upcoming events, search by keyword, filter by category and find activities that match your interests.</p></div>
+      <div class="info-card"><div class="large-icon">📋</div><h3>Know before you book</h3><p>Open an event to see its description, agenda, venue, date, fee, eligibility and what to bring.</p></div>
+      <div class="info-card"><div class="large-icon">🎟️</div><h3>Register with confidence</h3><p>Choose a free or paid event, provide student details and keep a local record of your booking.</p></div>
+      <div class="info-card"><div class="large-icon">🧾</div><h3>Track your bookings</h3><p>Review registrations, selected payment method and booking reference from the My Registrations page.</p></div>
+    </div>
+    <div class="section-head"><div><h2>Frequently asked questions</h2><p>Helpful details for this prototype.</p></div></div>
+    <div class="faq-list">
+      <div class="faq"><h3>Are the events real?</h3><p>No. The event listings are sample content for a college project. Replace them with verified college events.</p></div>
+      <div class="faq"><h3>Does paid registration collect money?</h3><p>No. Payment selection is a demo only. It does not charge a card, process UPI, or verify a payment.</p></div>
+      <div class="faq"><h3>Where is my data saved?</h3><p>In this browser's local storage. It is not shared with the college or other students.</p></div>
+      <div class="faq"><h3>Can I use this for a real college?</h3><p>Yes as a starting UI, but a real deployment needs a backend, secure login, a database and a verified payment gateway.</p></div>
+    </div>
+  </section>
 </main>
 
-
 <footer>
-    <p>CampusConnect — Your college life, all in one place.</p>
-    <p style="margin-top:5px">
-        Student Event Portal | College Management Project
-    </p>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand">✦ CampusConnect</div><p>Discover your campus beyond the classroom. Find events, meet people and make your college years count.</p></div>
+      <div><h4>Explore</h4><ul><li><button class="text-btn" data-goto="events">All events</button></li><li><button class="text-btn" data-goto="registrations">My registrations</button></li><li><button class="text-btn" data-goto="profile">Student profile</button></li></ul></div>
+      <div><h4>Project information</h4><ul><li>College Event Management UI</li><li>Responsive web design</li><li>Demo data only</li><li>No live payments</li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 CampusConnect · Student project prototype</span><span>Built for better campus experiences</span></div>
+  </div>
 </footer>
 
-
-<!-- REGISTRATION MODAL -->
-
-<div
-    class="modal"
-    id="registrationModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
->
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h2 id="modalTitle">Register for Event</h2>
-
-            <button
-                class="close-button"
-                id="closeModal"
-                aria-label="Close registration form"
-            >
-                &times;
-            </button>
-        </div>
-
-        <p class="modal-description" id="modalEventInfo">
-            Enter your details to register.
-        </p>
-
-        <form id="registrationForm">
-
-            <input type="hidden" id="selectedEventId">
-
-            <div class="form-group">
-                <label for="regName">Full Name</label>
-                <input type="text" id="regName" required>
-            </div>
-
-            <div class="form-group">
-                <label for="regEmail">Email Address</label>
-                <input type="email" id="regEmail" required>
-            </div>
-
-            <div class="form-group">
-                <label for="regStudentId">Student ID</label>
-                <input type="text" id="regStudentId" required>
-            </div>
-
-            <div class="form-group">
-                <label for="regDepartment">Department</label>
-                <select id="regDepartment" required>
-                    <option value="">Select department</option>
-                    <option value="CSE">Computer Science</option>
-                    <option value="CSBS">Computer Science and Business Systems</option>
-                    <option value="IT">Information Technology</option>
-                    <option value="ECE">Electronics and Communication</option>
-                    <option value="EEE">Electrical and Electronics</option>
-                    <option value="MECH">Mechanical Engineering</option>
-                    <option value="CIVIL">Civil Engineering</option>
-                    <option value="OTHER">Other</option>
-                </select>
-            </div>
-
-            <div class="form-actions">
-
-                <button type="button" class="secondary-button" id="cancelModal">
-                    Cancel
-                </button>
-
-                <button type="submit" class="primary-button">
-                    Confirm Registration
-                </button>
-
-            </div>
-
-        </form>
-
+<!-- Event detail and registration modal -->
+<div class="modal" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="modal-box">
+    <div class="modal-cover" id="detailCover"><div><span class="category" id="detailCategory">Category</span><h2 id="detailTitle">Event title</h2></div><button class="modal-close" id="closeDetail" aria-label="Close details">×</button><div class="cover-icon" id="detailIcon">🎓</div></div>
+    <div class="modal-main">
+      <p id="detailDescription"></p>
+      <div class="detail-grid" id="detailGrid"></div>
+      <div class="modal-section"><h3>About this event</h3><p id="detailAbout"></p></div>
+      <div class="modal-section"><h3>What to expect</h3><p id="detailAgenda"></p></div>
+      <div class="modal-section"><h3>Who can attend?</h3><p id="detailEligibility"></p></div>
+      <div class="modal-section"><h3>Things to know</h3><p id="detailBring"></p></div>
+      <div class="modal-actions"><button class="btn btn-primary" id="detailRegister">Continue to registration →</button><button class="btn btn-outline" id="closeDetailBottom">Close details</button></div>
     </div>
-
+  </div>
 </div>
 
-
+<div class="modal" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+  <div class="modal-box">
+    <div class="modal-main">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><div><h2 id="registerTitle">Register for event</h2><p id="registerSubtitle" style="margin-top:5px">Fill in your student details.</p></div><button class="btn btn-outline" id="closeRegister" aria-label="Close registration">×</button></div>
+      <form id="registrationForm" style="margin-top:22px">
+        <input type="hidden" id="selectedEventId">
+        <div class="form-grid">
+          <div class="field"><label for="regName">Full name *</label><input id="regName" required></div>
+          <div class="field"><label for="regEmail">Email address *</label><input id="regEmail" type="email" required></div>
+          <div class="field"><label for="regStudentId">Student ID *</label><input id="regStudentId" required></div>
+          <div class="field"><label for="regDept">Department *</label><select id="regDept" required><option value="">Choose department</option><option>CSE</option><option>CSBS</option><option>IT</option><option>ECE</option><option>EEE</option><option>Mechanical</option><option>Civil</option><option>Other</option></select></div>
+        </div>
+        <div class="payment-box">
+          <h3 id="feeHeading">Registration fee</h3>
+          <p id="feeText" style="font-size:13px;color:var(--muted)">Choose a payment method if the event is paid.</p>
+          <div id="paymentChoices" class="payment-options">
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="UPI" checked> UPI</label>
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="Card"> Debit/Credit</label>
+            <label class="payment-option"><input type="radio" name="paymentMethod" value="Net Banking"> Net banking</label>
+          </div>
+          <p class="payment-warning" id="paymentWarning">Demo only: no money will be charged. A real payment gateway is not connected.</p>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button type="button" class="btn btn-outline" id="cancelRegister">Cancel</button><button type="submit" class="btn btn-primary" id="confirmRegistration">Confirm registration</button></div>
+      </form>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-
 <script>
-
-/* ===================================
-   EVENT DATA
-=================================== */
-
-// Sample events based on your wireframe.
-// Replace these with your actual college events.
-
 const events = [
-    {
-        id: 1,
-        name: "Technical Symposium",
-        category: "Technical",
-        date: "2026-10-12",
-        time: "10:00 AM",
-        venue: "Main Block",
-        description: "Showcase your technical skills and participate in exciting competitions.",
-        icon: "💻",
-        cover: "cover-tech",
-        seats: 100
-    },
-
-    {
-        id: 2,
-        name: "Cultural Fest",
-        category: "Cultural",
-        date: "2026-10-18",
-        time: "5:00 PM",
-        venue: "Open Air Theatre",
-        description: "Celebrate music, dance, art and the spirit of campus life.",
-        icon: "🎭",
-        cover: "cover-culture",
-        seats: 250
-    },
-
-    {
-        id: 3,
-        name: "Intercollege Sports Meet",
-        category: "Sports",
-        date: "2026-10-24",
-        time: "8:00 AM",
-        venue: "College Sports Ground",
-        description: "Compete with fellow students in exciting sporting events.",
-        icon: "🏆",
-        cover: "cover-sports",
-        seats: 150
-    },
-
-    {
-        id: 4,
-        name: "Web Development Workshop",
-        category: "Workshop",
-        date: "2026-11-02",
-        time: "9:30 AM",
-        venue: "Computer Lab 2",
-        description: "Learn the fundamentals of building modern websites.",
-        icon: "🌐",
-        cover: "cover-workshop",
-        seats: 60
-    },
-
-    {
-        id: 5,
-        name: "Startup and Innovation Summit",
-        category: "Entrepreneurship",
-        date: "2026-11-10",
-        time: "10:30 AM",
-        venue: "Seminar Hall",
-        description: "Explore startup ideas, innovation and entrepreneurship.",
-        icon: "🚀",
-        cover: "cover-entrepreneurship",
-        seats: 120
-    },
-
-    {
-        id: 6,
-        name: "Photography and Arts Exhibition",
-        category: "Arts",
-        date: "2026-11-18",
-        time: "2:00 PM",
-        venue: "Library Auditorium",
-        description: "Discover student creativity through photography and art.",
-        icon: "🎨",
-        cover: "cover-arts",
-        seats: 80
-    }
+ {id:1,name:"CodeStorm Hackathon",category:"Technical",date:"2026-10-17",time:"9:00 AM – 6:00 PM",venue:"Innovation Lab, Block A",price:150,capacity:120,icon:"💻",cover:"tech",short:"Build, collaborate and compete in a full-day coding challenge.",about:"CodeStorm brings student developers together to solve practical problems in teams. Build a prototype, receive mentor feedback and present your idea to the judging panel.",agenda:"Opening briefing · Team formation · Problem-solving sprint · Mentor checkpoints · Final demos and awards.",eligibility:"Open to college students with an interest in software, design or problem-solving. Teams of 2–4 are recommended.",bring:"College ID, laptop, charger and your curiosity.",organizer:"Computer Science Association",popular:true},
+ {id:2,name:"Rhythm & Roots Cultural Fest",category:"Cultural",date:"2026-10-20",time:"4:00 PM – 8:30 PM",venue:"Open Air Theatre",price:0,capacity:400,icon:"🎭",cover:"culture",short:"A lively evening of dance, music, performances and campus spirit.",about:"Celebrate the diverse talents and cultures across campus with student performances, open-mic moments and interactive activities.",agenda:"Welcome performance · Dance showcase · Music sets · Open mic · Group finale.",eligibility:"Open to all students. Audience registration is free while places last.",bring:"College ID and a willingness to cheer for your friends.",organizer:"Cultural Committee",popular:true},
+ {id:3,name:"Intercollege Sports Meet",category:"Sports",date:"2026-10-24",time:"8:00 AM – 5:00 PM",venue:"College Sports Ground",price:100,capacity:200,icon:"🏆",cover:"sports",short:"Bring your team spirit to a day of competition and friendly rivalry.",about:"Students and invited teams compete in selected track, court and field events. The programme is designed to celebrate teamwork and sportsmanship.",agenda:"Check-in · Warm-up · Qualifying matches · Finals · Medal ceremony.",eligibility:"Students may register as individuals or as part of a team. Some competitions may require advance team nominations.",bring:"College ID, sportswear, water bottle and any required personal sports equipment.",organizer:"Physical Education Department",popular:true},
+ {id:4,name:"Build Your First Website",category:"Workshop",date:"2026-10-28",time:"10:00 AM – 1:00 PM",venue:"Computer Lab 2",price:0,capacity:55,icon:"🌐",cover:"workshop",short:"A beginner-friendly hands-on session on HTML, CSS and JavaScript.",about:"Learn how a webpage is structured, styled and made interactive. Participants will create a small landing page with guidance from student mentors.",agenda:"HTML essentials · CSS layout · JavaScript interaction · Mini build · Q&A.",eligibility:"Beginners are welcome. No prior web development experience is required.",bring:"Laptop if available, college ID and a notebook.",organizer:"Web & Open Source Club",popular:true},
+ {id:5,name:"Startup Spark Summit",category:"Entrepreneurship",date:"2026-11-03",time:"9:30 AM – 3:30 PM",venue:"Seminar Hall",price:250,capacity:100,icon:"🚀",cover:"startup",short:"Turn a promising idea into a pitch with insights from founders and mentors.",about:"Explore how early-stage ideas become useful products. Hear from founders, join a guided idea sprint and get practical feedback on your pitch.",agenda:"Founder talks · Problem discovery · Business model sprint · Pitch practice · Networking.",eligibility:"Open to students from all departments who are curious about innovation and entrepreneurship.",bring:"College ID, notebook and a one-minute idea if you have one.",organizer:"Entrepreneurship Cell",popular:false},
+ {id:6,name:"Creative Canvas Exhibition",category:"Arts",date:"2026-11-07",time:"11:00 AM – 4:00 PM",venue:"Central Library Gallery",price:0,capacity:180,icon:"🎨",cover:"arts",short:"Explore student art, photography, illustration and creative experiments.",about:"A showcase of student-made creative work, from photography and illustration to mixed-media pieces. Visitors can meet artists and vote for a favourite display.",agenda:"Gallery opening · Artist interactions · Guided walk-through · Audience choice announcement.",eligibility:"All students and faculty are welcome. Artists must submit work through the event organiser separately.",bring:"College ID. Please respect artwork and exhibition instructions.",organizer:"Fine Arts Club",popular:false},
+ {id:7,name:"Career Ready: Resume & Interview Lab",category:"Career",date:"2026-11-12",time:"10:00 AM – 1:30 PM",venue:"Placement Training Centre",price:0,capacity:70,icon:"🧑‍💼",cover:"career",short:"Improve your resume, practise interview answers and build confidence.",about:"A practical career-readiness session covering resume structure, project storytelling, common interview questions and professional communication.",agenda:"Resume checklist · Sample interview · Peer practice · Feedback session · Action plan.",eligibility:"Recommended for pre-final and final-year students, but all interested students may attend.",bring:"A draft resume, college ID and details of one project or experience.",organizer:"Career Development Cell",popular:true},
+ {id:8,name:"Mindful Campus: Wellness Hour",category:"Wellness",date:"2026-11-15",time:"3:00 PM – 4:30 PM",venue:"Student Activity Centre",price:0,capacity:60,icon:"🌿",cover:"wellness",short:"Take a pause with simple mindfulness, journaling and wellbeing activities.",about:"A calm, student-friendly session offering guided breathing, reflection prompts and practical ways to create healthier study routines.",agenda:"Welcome · Guided breathing · Journaling activity · Study-life balance discussion · Closing reflection.",eligibility:"Open to all students. Activities are optional and participants may take a break whenever needed.",bring:"Water bottle and a notebook if you like to journal.",organizer:"Student Wellness Committee",popular:false},
+ {id:9,name:"Battle of the Bands",category:"Music",date:"2026-11-20",time:"5:00 PM – 9:00 PM",venue:"Main Auditorium",price:80,capacity:300,icon:"🎸",cover:"music",short:"An evening of live student music, original songs and high-energy performances.",about:"Student bands take the stage to perform original music and selected covers. Audience members can enjoy the show and support campus musicians.",agenda:"Doors open · Opening act · Band rounds · Guest performance · Results.",eligibility:"Open to students with a valid registration. Performer registration is handled separately by the music club.",bring:"College ID and your booking reference. Follow venue entry rules.",organizer:"Music Society",popular:false},
+ {id:10,name:"Green Campus Action Day",category:"Environment",date:"2026-11-23",time:"8:30 AM – 12:00 PM",venue:"Campus Garden Assembly Point",price:0,capacity:100,icon:"🌱",cover:"environment",short:"Join student volunteers for a campus clean-up and sustainability activities.",about:"Take part in a student-led morning focused on campus cleanliness, planting and practical sustainability awareness.",agenda:"Volunteer briefing · Clean-up teams · Planting activity · Waste sorting demo · Group photo.",eligibility:"Open to students willing to follow volunteer safety guidance. Registration helps organisers plan supplies.",bring:"Comfortable clothes, closed shoes and a reusable water bottle.",organizer:"Eco Club",popular:false},
+ {id:11,name:"Money Matters: Student Finance Basics",category:"Workshop",date:"2026-11-27",time:"2:00 PM – 4:00 PM",venue:"Lecture Hall 3",price:50,capacity:90,icon:"💰",cover:"finance",short:"Understand budgeting, saving, digital payment safety and financial basics.",about:"An introductory session that helps students understand everyday budgeting, expense tracking, saving habits and common digital payment safety practices.",agenda:"Budget basics · Needs vs wants · Digital payment safety · Sample monthly plan · Q&A.",eligibility:"Open to all departments. This is an educational workshop, not individual financial advice.",bring:"College ID and a notebook or device for the budgeting activity.",organizer:"Commerce & Finance Forum",popular:false},
+ {id:12,name:"Alumni Connect & Networking Evening",category:"Community",date:"2026-12-02",time:"4:00 PM – 7:00 PM",venue:"Conference Centre",price:120,capacity:150,icon:"🤝",cover:"community",short:"Meet alumni, hear career stories and practise building professional connections.",about:"Connect with graduates from different career paths and learn about their college experiences, first roles and lessons from the workplace.",agenda:"Welcome · Alumni stories · Small-group networking · Student questions · Closing.",eligibility:"Open to current students. Please be respectful of speakers' time and networking guidelines.",bring:"College ID and two questions you would like to ask an alumnus.",organizer:"Alumni Relations Office",popular:false}
 ];
 
-
-/* ===================================
-   LOCAL STORAGE
-=================================== */
-
-function loadStorage(key, fallback) {
-    try {
-        const value = localStorage.getItem(key);
-        return value ? JSON.parse(value) : fallback;
-    } catch (error) {
-        return fallback;
-    }
-}
-
-function saveStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-}
-
-let registrations = loadStorage("campusRegistrations", []);
-let profile = loadStorage("campusProfile", {});
-
-
-/* ===================================
-   HELPER FUNCTIONS
-=================================== */
-
-function formatDate(dateString) {
-    const date = new Date(dateString + "T00:00:00");
-
-    return date.toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-    });
-}
-
-function getEvent(id) {
-    return events.find(event => event.id === Number(id));
-}
-
-function isPast(event) {
-    const eventDate = new Date(event.date + "T23:59:59");
-    return eventDate < new Date();
-}
-
-function getRemainingSeats(event) {
-    const count = registrations.filter(
-        registration => registration.eventId === event.id
-    ).length;
-
-    return Math.max(0, event.seats - count);
-}
-
-function isRegistered(eventId) {
-    return registrations.some(
-        registration => registration.eventId === Number(eventId)
-    );
-}
-
-function showToast(message) {
-    const toast = document.getElementById("toast");
-
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    clearTimeout(showToast.timeout);
-
-    showToast.timeout = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 3000);
-}
-
-
-/* ===================================
-   EVENT CARD
-=================================== */
-
-function createEventCard(event) {
-    const registered = isRegistered(event.id);
-    const past = isPast(event);
-    const remaining = getRemainingSeats(event);
-
-    let buttonText = "Register Now";
-    let disabled = false;
-
-    if (registered) {
-        buttonText = "Registered";
-        disabled = true;
-    } else if (past) {
-        buttonText = "Event Ended";
-        disabled = true;
-    } else if (remaining === 0) {
-        buttonText = "Fully Booked";
-        disabled = true;
-    }
-
-    return `
-        <article class="event-card">
-
-            <div class="event-cover ${event.cover}">
-
-                <span class="category-badge">
-                    ${event.category}
-                </span>
-
-                <span class="event-emoji" aria-hidden="true">
-                    ${event.icon}
-                </span>
-
-            </div>
-
-            <div class="event-body">
-
-                <h3>${event.name}</h3>
-
-                <p class="event-description">
-                    ${event.description}
-                </p>
-
-                <p class="event-detail">
-                    📅 ${formatDate(event.date)}
-                </p>
-
-                <p class="event-detail">
-                    🕒 ${event.time}
-                </p>
-
-                <p class="event-detail">
-                    📍 ${event.venue}
-                </p>
-
-                <div class="event-footer">
-
-                    <span class="seats">
-                        ${remaining} seats left
-                    </span>
-
-                    <button
-                        class="primary-button"
-                        data-register="${event.id}"
-                        ${disabled ? "disabled" : ""}
-                    >
-                        ${buttonText}
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-    `;
-}
-
-
-/* ===================================
-   RENDER EVENTS
-=================================== */
-
-function renderEvents() {
-
-    // Featured events on the home page.
-    const upcomingEvents = events
-        .filter(event => !isPast(event))
-        .sort((a, b) => a.date.localeCompare(b.date));
-
-    document.getElementById("featuredEvents").innerHTML =
-        upcomingEvents.length
-            ? upcomingEvents.slice(0, 3).map(createEventCard).join("")
-            : `<div class="empty-state">
-                   <h3>No upcoming events</h3>
-                   <p>Check back later for new college events.</p>
-               </div>`;
-
-    // Search and filter on the Events page.
-    const search = document
-        .getElementById("searchInput")
-        .value.trim().toLowerCase();
-
-    const category = document
-        .getElementById("categoryFilter")
-        .value;
-
-    const sort = document
-        .getElementById("sortFilter")
-        .value;
-
-    let filteredEvents = upcomingEvents.filter(event => {
-
-        const matchesSearch =
-            event.name.toLowerCase().includes(search) ||
-            event.category.toLowerCase().includes(search) ||
-            event.venue.toLowerCase().includes(search);
-
-        const matchesCategory =
-            category === "All" || event.category === category;
-
-        return matchesSearch && matchesCategory;
-    });
-
-    if (sort === "name") {
-        filteredEvents.sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    document.getElementById("allEvents").innerHTML =
-        filteredEvents.length
-            ? filteredEvents.map(createEventCard).join("")
-            : `<div class="empty-state">
-                   <h3>No events found</h3>
-                   <p>Try another search or select a different category.</p>
-               </div>`;
-
-    // Dashboard statistics.
-    document.getElementById("eventCount").textContent =
-        upcomingEvents.length;
-
-    document.getElementById("registrationCount").textContent =
-        registrations.length;
-
-    document.getElementById("categoryCount").textContent =
-        new Set(upcomingEvents.map(event => event.category)).size;
-}
-
-
-/* ===================================
-   PAGE NAVIGATION
-=================================== */
-
-function showPage(pageId) {
-
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
-
-    document.getElementById(pageId).classList.add("active");
-
-    document.querySelectorAll("[data-page]").forEach(button => {
-        button.classList.toggle(
-            "active",
-            button.dataset.page === pageId
-        );
-    });
-
-    if (pageId === "registrations") {
-        renderRegistrations();
-    }
-
-    if (pageId === "profile") {
-        fillProfile();
-    }
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-document.querySelectorAll("[data-page]").forEach(button => {
-    button.addEventListener("click", () => {
-        showPage(button.dataset.page);
-    });
-});
-
-document.getElementById("navProfile").addEventListener("click", () => {
-    showPage("profile");
-});
-
-document.getElementById("exploreEvents").addEventListener("click", () => {
-    showPage("events");
-});
-
-document.getElementById("viewAllEvents").addEventListener("click", () => {
-    showPage("events");
-});
-
-
-/* ===================================
-   SEARCH AND FILTER
-=================================== */
-
-document.getElementById("searchInput").addEventListener(
-    "input",
-    renderEvents
-);
-
-document.getElementById("categoryFilter").addEventListener(
-    "change",
-    renderEvents
-);
-
-document.getElementById("sortFilter").addEventListener(
-    "change",
-    renderEvents
-);
-
-
-/* ===================================
-   OPEN REGISTRATION FORM
-=================================== */
-
-const modal = document.getElementById("registrationModal");
-
-function openRegistration(eventId) {
-
-    const event = getEvent(eventId);
-
-    if (!event) {
-        return;
-    }
-
-    if (isPast(event)) {
-        showToast("This event has already ended.");
-        return;
-    }
-
-    if (isRegistered(event.id)) {
-        showToast("You have already registered for this event.");
-        return;
-    }
-
-    if (getRemainingSeats(event) <= 0) {
-        showToast("Sorry, this event is fully booked.");
-        return;
-    }
-
-    document.getElementById("selectedEventId").value = event.id;
-
-    document.getElementById("modalTitle").textContent =
-        "Register for " + event.name;
-
-    document.getElementById("modalEventInfo").textContent =
-        `${formatDate(event.date)} · ${event.time} · ${event.venue}`;
-
-    fillRegistrationForm();
-
-    modal.classList.add("show");
-
-    document.getElementById("regName").focus();
-}
-
-function closeRegistration() {
-    modal.classList.remove("show");
-}
-
-document.getElementById("closeModal").addEventListener(
-    "click",
-    closeRegistration
-);
-
-document.getElementById("cancelModal").addEventListener(
-    "click",
-    closeRegistration
-);
-
-modal.addEventListener("click", event => {
-    if (event.target === modal) {
-        closeRegistration();
-    }
-});
-
-document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-        closeRegistration();
-    }
-});
-
-// Event delegation makes buttons work after rendering.
-document.addEventListener("click", event => {
-
-    const button = event.target.closest("[data-register]");
-
-    if (button && !button.disabled) {
-        openRegistration(button.dataset.register);
-    }
-});
-
-
-/* ===================================
-   PROFILE
-=================================== */
-
-function fillProfile() {
-
-    document.getElementById("studentName").value =
-        profile.name || "";
-
-    document.getElementById("studentEmail").value =
-        profile.email || "";
-
-    document.getElementById("studentId").value =
-        profile.studentId || "";
-
-    document.getElementById("studentDepartment").value =
-        profile.department || "";
-}
-
-function fillRegistrationForm() {
-
-    document.getElementById("regName").value =
-        profile.name || "";
-
-    document.getElementById("regEmail").value =
-        profile.email || "";
-
-    document.getElementById("regStudentId").value =
-        profile.studentId || "";
-
-    document.getElementById("regDepartment").value =
-        profile.department || "";
-}
-
-document.getElementById("profileForm").addEventListener(
-    "submit",
-    event => {
-
-        event.preventDefault();
-
-        profile = {
-            name: document.getElementById("studentName").value.trim(),
-            email: document.getElementById("studentEmail").value.trim(),
-            studentId: document.getElementById("studentId").value.trim(),
-            department: document.getElementById("studentDepartment").value
-        };
-
-        saveStorage("campusProfile", profile);
-
-        showToast("Profile saved successfully.");
-    }
-);
-
-
-/* ===================================
-   CONFIRM REGISTRATION
-=================================== */
-
-document.getElementById("registrationForm").addEventListener(
-    "submit",
-    event => {
-
-        event.preventDefault();
-
-        const eventId = Number(
-            document.getElementById("selectedEventId").value
-        );
-
-        const selectedEvent = getEvent(eventId);
-
-        if (!selectedEvent) {
-            showToast("Event not found.");
-            return;
-        }
-
-        if (isPast(selectedEvent)) {
-            showToast("Registration is closed for this event.");
-            closeRegistration();
-            renderEvents();
-            return;
-        }
-
-        if (isRegistered(eventId)) {
-            showToast("You are already registered.");
-            closeRegistration();
-            return;
-        }
-
-        if (getRemainingSeats(selectedEvent) <= 0) {
-            showToast("Sorry, this event is fully booked.");
-            closeRegistration();
-            renderEvents();
-            return;
-        }
-
-        const registration = {
-            registrationId: Date.now(),
-            eventId: eventId,
-            name: document.getElementById("regName").value.trim(),
-            email: document.getElementById("regEmail").value.trim(),
-            studentId: document.getElementById("regStudentId").value.trim(),
-            department: document.getElementById("regDepartment").value,
-            registeredAt: new Date().toISOString()
-        };
-
-        registrations.push(registration);
-
-        saveStorage("campusRegistrations", registrations);
-
-        // Keep the profile available for future registrations.
-        profile = {
-            name: registration.name,
-            email: registration.email,
-            studentId: registration.studentId,
-            department: registration.department
-        };
-
-        saveStorage("campusProfile", profile);
-
-        closeRegistration();
-
-        document.getElementById("registrationForm").reset();
-
-        renderEvents();
-
-        renderRegistrations();
-
-        showPage("registrations");
-
-        showToast("Registration completed successfully.");
-    }
-);
-
-
-/* ===================================
-   MY REGISTRATIONS
-=================================== */
-
-function renderRegistrations() {
-
-    const container = document.getElementById("registrationList");
-
-    document.getElementById("registrationCount").textContent =
-        registrations.length;
-
-    if (registrations.length === 0) {
-
-        container.innerHTML = `
-            <div class="empty-state">
-
-                <h3>No registrations yet</h3>
-
-                <p>
-                    Explore upcoming college events and register
-                    for the ones you like.
-                </p>
-
-                <button class="primary-button" id="browseEvents">
-                    Browse Events
-                </button>
-
-            </div>
-        `;
-
-        document.getElementById("browseEvents").addEventListener(
-            "click",
-            () => showPage("events")
-        );
-
-        return;
-    }
-
-    container.innerHTML = registrations.map(registration => {
-
-        const event = getEvent(registration.eventId);
-
-        if (!event) {
-            return "";
-        }
-
-        const eventEnded = isPast(event);
-
-        return `
-            <div class="registration-card">
-
-                <div>
-
-                    <h3>${event.name}</h3>
-
-                    <p>📅 ${formatDate(event.date)} · ${event.time}</p>
-
-                    <p>📍 ${event.venue}</p>
-
-                    <p>Registration ID: ${registration.registrationId}</p>
-
-                    <p>Registered as: ${registration.name}</p>
-
-                    <span class="status-badge">
-                        ${eventEnded ? "Event Ended" : "Registered"}
-                    </span>
-
-                </div>
-
-                <button
-                    class="danger-button"
-                    data-cancel="${registration.registrationId}"
-                >
-                    Cancel Registration
-                </button>
-
-            </div>
-        `;
-
-    }).join("");
-}
-
-
-// Cancel a registration.
-document.addEventListener("click", event => {
-
-    const button = event.target.closest("[data-cancel]");
-
-    if (!button) {
-        return;
-    }
-
-    const registrationId = Number(button.dataset.cancel);
-
-    const confirmed = window.confirm(
-        "Are you sure you want to cancel this registration?"
-    );
-
-    if (!confirmed) {
-        return;
-    }
-
-    registrations = registrations.filter(
-        registration =>
-            registration.registrationId !== registrationId
-    );
-
-    saveStorage("campusRegistrations", registrations);
-
-    renderRegistrations();
-    renderEvents();
-
-    showToast("Registration cancelled.");
-});
-
-
-/* ===================================
-   INITIALIZE WEBSITE
-=================================== */
-
-renderEvents();
-renderRegistrations();
-fillProfile();
-
+const STORAGE_REGS="campusConnectRegistrationsV2";
+const STORAGE_PROFILE="campusConnectProfileV2";
+let registrations=readStore(STORAGE_REGS,[]);
+let profile=readStore(STORAGE_PROFILE,{});
+let activeEventId=null;
+let detailReturnPage="events";
+
+function readStore(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch(e){return fallback}}
+function saveStore(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){toast("Browser storage is unavailable. Your changes may not be saved.")}}
+function fmtDate(s){return new Date(s+"T00:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}
+function getEvent(id){return events.find(e=>e.id===Number(id))}
+function ended(e){return new Date(e.date+"T23:59:59")<new Date()}
+function countFor(id){return registrations.filter(r=>r.eventId===Number(id)&&r.status!=="Cancelled").length}
+function seatsLeft(e){return Math.max(0,e.capacity-countFor(e.id))}
+function registered(id){return registrations.some(r=>r.eventId===Number(id)&&r.status!=="Cancelled")}
+function money(n){return n===0?"Free":"₹"+n}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),3200)}
+function eventCard(e){const isBooked=registered(e.id),past=ended(e),left=seatsLeft(e);let label="View details",disabled=false;if(isBooked){label="Already registered";disabled=true}else if(past){label="Event ended";disabled=true}else if(left===0){label="Fully booked";disabled=true}
+return `<article class="event-card"><div class="cover ${e.cover}"><span class="category">${e.category}</span><span class="cover-icon">${e.icon}</span></div><div class="event-body"><div class="event-title-row"><h3>${e.name}</h3><span class="price ${e.price===0?"free":""}">${money(e.price)}</span></div><p class="event-desc">${e.short}</p><div class="event-meta"><span>📅 ${fmtDate(e.date)} · ${e.time}</span><span>📍 ${e.venue}</span><span>${e.price===0?"🆓 Free entry":"💳 Paid registration"} · ${left} spots left</span></div><div class="event-bottom"><span class="seat-note">${e.organizer}</span><div class="event-buttons"><button class="btn btn-outline small-btn" data-details="${e.id}">Details</button><button class="btn btn-primary small-btn" data-card-register="${e.id}" ${disabled?"disabled":""}>${label==="View details"?"Register":label}</button></div></div></div></article>`}
+function upcoming(){return events.filter(e=>!ended(e)).sort((a,b)=>a.date.localeCompare(b.date))}
+function renderAll(){renderHome();renderEvents();renderRegistrations();updateStats()}
+function renderHome(){const up=upcoming();document.getElementById("featuredGrid").innerHTML=up.filter(e=>e.popular).slice(0,3).map(eventCard).join("");document.getElementById("categoryHighlights").innerHTML=up.filter(e=>["Workshop","Environment","Career"].includes(e.category)).map(eventCard).join("")}
+function renderEvents(){const q=document.getElementById("searchInput").value.trim().toLowerCase(),cat=document.getElementById("categoryFilter").value,price=document.getElementById("priceFilter").value,sort=document.getElementById("sortFilter").value;let list=upcoming().filter(e=>(e.name+" "+e.category+" "+e.venue+" "+e.short+" "+e.organizer).toLowerCase().includes(q)&&(cat==="All"||e.category===cat)&&(price==="All"||(price==="Free"?e.price===0:e.price>0)));if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name));if(sort==="price-low")list.sort((a,b)=>a.price-b.price);if(sort==="price-high")list.sort((a,b)=>b.price-a.price);document.getElementById("resultsLine").textContent=`Showing ${list.length} of ${upcoming().length} upcoming events`;document.getElementById("allEventsGrid").innerHTML=list.length?list.map(eventCard).join():`<div class="empty"><div class="empty-icon">🔎</div><h3>No matching events</h3><p>Try another search term or change the filters.</p><button class="btn btn-outline" id="clearFilters">Clear filters</button></div>`;const clear=document.getElementById("clearFilters");if(clear)clear.onclick=()=>{document.getElementById("searchInput").value="";document.getElementById("categoryFilter").value="All";document.getElementById("priceFilter").value="All";document.getElementById("sortFilter").value="date";renderEvents()}}
+function updateStats(){document.getElementById("statEvents").textContent=upcoming().length;document.getElementById("statRegs").textContent=registrations.filter(r=>r.status!=="Cancelled").length;document.getElementById("statFree").textContent=upcoming().filter(e=>e.price===0).length;document.getElementById("statPaid").textContent=upcoming().filter(e=>e.price>0).length;document.getElementById("avatar").textContent=(profile.name||"S").trim().charAt(0).toUpperCase()}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));if(id==="registrations")renderRegistrations();if(id==="profile")fillProfile();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.goto)));
+document.getElementById("topExplore").onclick=()=>showPage("events");document.getElementById("heroExplore").onclick=()=>showPage("events");document.getElementById("heroMyRegs").onclick=()=>showPage("registrations");
+["searchInput","categoryFilter","priceFilter","sortFilter"].forEach(id=>document.getElementById(id).addEventListener(id==="searchInput"?"input":"change",renderEvents));
+
+function openDetails(id,returnPage){const e=getEvent(id);if(!e)return;activeEventId=e.id;detailReturnPage=returnPage||"events";const cover=document.getElementById("detailCover");cover.className="modal-cover cover "+e.cover;document.getElementById("detailTitle").textContent=e.name;document.getElementById("detailCategory").textContent=e.category;document.getElementById("detailIcon").textContent=e.icon;document.getElementById("detailDescription").textContent=e.short;document.getElementById("detailAbout").textContent=e.about;document.getElementById("detailAgenda").textContent=e.agenda;document.getElementById("detailEligibility").textContent=e.eligibility;document.getElementById("detailBring").textContent=e.bring;document.getElementById("detailGrid").innerHTML=`<div class="detail-item"><small>DATE & TIME</small><strong>📅 ${fmtDate(e.date)}<br>${e.time}</strong></div><div class="detail-item"><small>VENUE</small><strong>📍 ${e.venue}</strong></div><div class="detail-item"><small>REGISTRATION FEE</small><strong>${e.price===0?"🆓 Free":`₹${e.price} per student`}</strong></div><div class="detail-item"><small>AVAILABLE SPOTS</small><strong>${seatsLeft(e)} of ${e.capacity}</strong></div><div class="detail-item"><small>ORGANISED BY</small><strong>${e.organizer}</strong></div><div class="detail-item"><small>REGISTRATION</small><strong>${ended(e)?"Closed":registered(e.id)?"You are registered":seatsLeft(e)===0?"Full":"Open"}</strong></div>`;const btn=document.getElementById("detailRegister");btn.disabled=ended(e)||registered(e.id)||seatsLeft(e)===0;btn.textContent=registered(e.id)?"Already registered":ended(e)?"Registration closed":seatsLeft(e)===0?"Fully booked":`Register ${e.price?`· ₹${e.price}`:"for free"} →`;document.getElementById("eventModal").classList.add("show")}
+function closeDetails(){document.getElementById("eventModal").classList.remove("show")}
+document.addEventListener("click",ev=>{const d=ev.target.closest("[data-details]");if(d){openDetails(d.dataset.details,document.querySelector(".page.active")?.id||"events");return}const r=ev.target.closest("[data-card-register]");if(r){const e=getEvent(r.dataset.cardRegister);if(e&&!r.disabled){openDetails(e.id,document.querySelector(".page.active")?.id||"events")} }});
+document.getElementById("closeDetail").onclick=closeDetails;document.getElementById("closeDetailBottom").onclick=closeDetails;document.getElementById("eventModal").addEventListener("click",e=>{if(e.target.id==="eventModal")closeDetails()});
+document.getElementById("detailRegister").onclick=()=>{const e=getEvent(activeEventId);if(!e)return;if(registered(e.id)){toast("You are already registered for this event.");return}if(ended(e)||seatsLeft(e)===0){toast("Registration is not available for this event.");return}closeDetails();openRegistration(e.id)};
+function openRegistration(id){const e=getEvent(id);if(!e)return;if(ended(e)||registered(e.id)||seatsLeft(e)===0){toast("Registration is not available.");return}activeEventId=e.id;document.getElementById("selectedEventId").value=e.id;document.getElementById("registerTitle").textContent="Register for "+e.name;document.getElementById("registerSubtitle").textContent=`${fmtDate(e.date)} · ${e.time} · ${e.venue}`;fillRegistration();document.getElementById("feeHeading").textContent=e.price===0?"No registration fee":"Registration fee: ₹"+e.price;document.getElementById("feeText").textContent=e.price===0?"This event is free. No payment method is needed.":`A fee of ₹${e.price} is listed for this sample event.`;document.getElementById("paymentChoices").style.display=e.price===0?"none":"grid";document.getElementById("paymentWarning").style.display=e.price===0?"none":"block";document.getElementById("confirmRegistration").textContent=e.price===0?"Confirm free registration":`Continue · ₹${e.price} (demo)`;document.querySelectorAll('input[name="paymentMethod"]').forEach(x=>x.checked=x.value==="UPI");document.getElementById("registerModal").classList.add("show")}
+function closeRegistration(){document.getElementById("registerModal").classList.remove("show")}
+document.getElementById("closeRegister").onclick=closeRegistration;document.getElementById("cancelRegister").onclick=closeRegistration;document.getElementById("registerModal").addEventListener("click",e=>{if(e.target.id==="registerModal")closeRegistration()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDetails();closeRegistration()}});
+function fillProfile(){document.getElementById("profileName").value=profile.name||"";document.getElementById("profileEmail").value=profile.email||"";document.getElementById("profileStudentId").value=profile.studentId||"";document.getElementById("profileDept").value=profile.department||"";document.getElementById("profileYear").value=profile.year||"";document.getElementById("profilePhone").value=profile.phone||""}
+function fillRegistration(){document.getElementById("regName").value=profile.name||"";document.getElementById("regEmail").value=profile.email||"";document.getElementById("regStudentId").value=profile.studentId||"";document.getElementById("regDept").value=profile.department||""}
+document.getElementById("profileForm").addEventListener("submit",e=>{e.preventDefault();profile={name:document.getElementById("profileName").value.trim(),email:document.getElementById("profileEmail").value.trim(),studentId:document.getElementById("profileStudentId").value.trim(),department:document.getElementById("profileDept").value,year:document.getElementById("profileYear").value,phone:document.getElementById("profilePhone").value.trim()};saveStore(STORAGE_PROFILE,profile);updateStats();toast("Student profile saved in this browser.")});
+document.getElementById("registrationForm").addEventListener("submit",e=>{e.preventDefault();const id=Number(document.getElementById("selectedEventId").value),event=getEvent(id);if(!event||ended(event)||registered(id)||seatsLeft(event)===0){toast("Sorry, registration is no longer available.");closeRegistration();renderAll();return}const method=event.price===0?"No payment required":document.querySelector('input[name="paymentMethod"]:checked')?.value||"UPI";const record={registrationId:"CC-"+Date.now().toString().slice(-8),eventId:id,name:document.getElementById("regName").value.trim(),email:document.getElementById("regEmail").value.trim(),studentId:document.getElementById("regStudentId").value.trim(),department:document.getElementById("regDept").value,paymentMethod:method,fee:event.price,paymentStatus:event.price===0?"Free":"Demo only — not paid",status:"Registered",createdAt:new Date().toISOString()};registrations.push(record);profile={...profile,name:record.name,email:record.email,studentId:record.studentId,department:record.department};saveStore(STORAGE_REGS,registrations);saveStore(STORAGE_PROFILE,profile);closeRegistration();document.getElementById("registrationForm").reset();renderAll();showPage("registrations");toast(event.price===0?"Free event registration confirmed.":"Demo registration saved; no payment was collected.")});
+function renderRegistrations(){const box=document.getElementById("registrationList");const active=registrations.filter(r=>r.status!=="Cancelled");if(!active.length){box.innerHTML=`<div class="empty"><div class="empty-icon">🎟️</div><h3>No registrations yet</h3><p>Your bookings will appear here after you register for an event.</p><button class="btn btn-primary" id="browseNow">Explore events</button></div>`;document.getElementById("browseNow").onclick=()=>showPage("events");return}box.innerHTML=active.slice().reverse().map(r=>{const e=getEvent(r.eventId);if(!e)return"";return `<div class="registration-row"><div><h3>${e.icon} ${e.name}</h3><p>📅 ${fmtDate(e.date)} · ${e.time}</p><p>Booking reference: <strong>${r.registrationId}</strong></p><p>Fee: <strong>${money(r.fee)}</strong> · Payment method: ${r.paymentMethod}</p><p>Payment status: <strong>${r.paymentStatus}</strong></p><span class="status ${r.fee>0?"pending":""}">${r.fee>0?"Demo booking — payment not completed":"Free registration confirmed"}</span></div><div class="registration-actions"><button class="btn btn-outline" data-details="${e.id}">View event</button><button class="btn btn-outline" data-cancel="${r.registrationId}">Cancel</button></div></div>`}).join("")}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-cancel]");if(!b)return;const r=registrations.find(x=>x.registrationId===b.dataset.cancel);if(!r)return;if(!confirm("Cancel this registration?"))return;r.status="Cancelled";saveStore(STORAGE_REGS,registrations);renderAll();toast("Registration cancelled in this browser.")});
+renderAll();fillProfile();
 </script>
-
 </body>
 </html>
